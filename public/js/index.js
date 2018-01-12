@@ -1,11 +1,9 @@
 function main() {
-  const user = {
-    _id: 'anonid',
-    name: 'Anonymous',
-    last_post: 'Anon was here',
-  };
-  renderNavbar(user);
-  renderStories(user);
+  get('/api/whoami', {}, function(user) {
+    console.log(user);
+    renderNavbar(user);
+    renderStories(user);
+  });
 }
 
 main();

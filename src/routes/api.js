@@ -9,12 +9,16 @@ const router = express.Router();
 
 // api endpoints
 router.get('/whoami', function(req, res) {
-  res.send({
-    _id: 'anonid',
-    name: 'Anonymous',
-    last_post: 'Anon was here',
-  });
+  
+  if(req.isAuthenticated()){
+    console.log("HUARRAY");
+    res.send(req.user);
+  }
+  else{
+    res.send({});
+  }
 });
+
 
 router.get('/user', function(req, res) {
   res.send({
