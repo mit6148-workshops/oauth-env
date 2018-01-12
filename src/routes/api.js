@@ -11,7 +11,6 @@ const router = express.Router();
 router.get('/whoami', function(req, res) {
   
   if(req.isAuthenticated()){
-    console.log("HUARRAY");
     res.send(req.user);
   }
   else{
