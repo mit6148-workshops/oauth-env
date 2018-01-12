@@ -17,6 +17,9 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// hook up passport
+app.use(passport.initialize());
+
 // set routes
 app.use('/', views);
 app.use('/api', api );
