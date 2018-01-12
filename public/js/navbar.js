@@ -11,7 +11,12 @@ function renderNavbar(user) {
   const navbarDiv = document.getElementById('nav-item-container');
 
   navbarDiv.appendChild(newNavbarItem('Home', '/'));
-  navbarDiv.appendChild(newNavbarItem('Profile', '/u/profile?'+user._id));
-  navbarDiv.appendChild(newNavbarItem('Login', '/auth/facebook'));
+
+  if (user._id !== undefined) {
+    navbarDiv.appendChild(newNavbarItem('Profile', '/u/profile?'+user._id));
+    navbarDiv.appendChild(newNavbarItem('Logout', '/logout'));
+  } else {
+    navbarDiv.appendChild(newNavbarItem('Login', '/auth/facebook'));
+  }
   
 }
