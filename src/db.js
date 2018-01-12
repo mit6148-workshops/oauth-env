@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 // set up mongoDB connection
-const mongoURL = 'mongodb://admin:password@ds237707.mlab.com:37707/catbookdb';
+// Example URI ---> mongodb://aaron:badpassword123@ds237707.mlab.com:37707/catbookdb';
+const mongoURL = 'ENTER YOUR OWN MONGODB URI HERE!';
 const options = {
   useMongoClient: true
 };
