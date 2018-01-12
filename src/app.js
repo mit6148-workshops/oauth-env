@@ -6,6 +6,7 @@ const express = require('express');
 
 // local dependencies
 const db = require('./db');
+const passport = require('./passport');
 const views = require('./routes/views');
 const api = require('./routes/api');
 
@@ -20,10 +21,25 @@ app.use(bodyParser.json());
 // hook up passport
 app.use(passport.initialize());
 
+// authentication routes
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get(
+  '/auth/facebook/callback',
+  passport.authenticate(
+    'facebook',
+    { failureRedirect: '/' }
+  ),
+  function(req, res) {
+    res.redirect('/');
+  }
+);
+
 // set routes
 app.use('/', views);
 app.use('/api', api );
 app.use('/static', express.static('public'));
+
 
 // 404 route
 app.use(function(req, res, next) {
