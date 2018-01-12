@@ -1,5 +1,6 @@
 // dependencies
 const express = require('express');
+const connect = require('connect-ensure-login');
 
 // models
 const Story = require('../models/story');
@@ -35,10 +36,11 @@ router.get('/stories', function(req, res) {
 
 router.post(
   '/story',
+  connect.ensureLoggedIn(),
   function(req, res) {
     const newStory = new Story({
-      'creator_id': 'anonid',
-      'creator_name': 'Anonmymous',
+      'creator_id': req.user._id,
+      'creator_name': req.user.name,
       'content': req.body.content,
     });
 
@@ -59,10 +61,11 @@ router.get('/comment', function(req, res) {
 
 router.post(
   '/comment',
+  connect.ensureLoggedIn(),
   function(req, res) {
     const newComment = new Comment({
-      'creator_id': 'anonid',
-      'creator_name': 'Anonymous',
+      'creator_id': req.user._id,
+      'creator_name': req.user.name,
       'parent': req.body.parent,
       'content': req.body.content,
     });
