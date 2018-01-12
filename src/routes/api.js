@@ -3,6 +3,7 @@ const express = require('express');
 const connect = require('connect-ensure-login');
 
 // models
+const User = require('../models/user');
 const Story = require('../models/story');
 const Comment = require('../models/comment');
 
@@ -21,10 +22,8 @@ router.get('/whoami', function(req, res) {
 
 
 router.get('/user', function(req, res) {
-  res.send({
-    _id: 'anonid',
-    name: 'Anonymous',
-    last_post: 'Anon was here',
+  User.findOne({ _id: req.query._id }, function(err, user) {
+    res.send(user);
   });
 });
 
@@ -43,9 +42,13 @@ router.post(
       'creator_name': req.user.name,
       'content': req.body.content,
     });
-
+  
     newStory.save(function(err,story) {
-      // configure socketio
+      User.findOne({ _id: req.user._id },function(err,user) {
+        user.last_post = req.body.content;
+        user.save(); // this is OK, because the following lines of code are not reliant on the state of user, so we don't have to shove them in a callback. 
+        });
+        // configure socketio
       if (err) console.log(err);
     });
 

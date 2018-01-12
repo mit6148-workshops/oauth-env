@@ -3,12 +3,9 @@ function main() {
   get('/api/user', {'_id': profileId}, function(profileUser) {
     renderUserData(profileUser);
   });
-  const user = {
-    _id: 'anonid',
-    name: 'Anonymous',
-    last_post: 'Anon was here',
-  };
-  renderNavbar(user);
+  get('/api/whoami', {}, function(user) {
+    renderNavbar(user);
+  });
 }
 
 function renderUserData(user) {
