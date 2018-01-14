@@ -13,7 +13,7 @@ passport.use(new fbp.Strategy({
     if (err) return done(err);
 
     if (!user) {
-      const user = new User({
+      user = new User({
         name: profile.displayName,
         fbid: profile.id
       });
