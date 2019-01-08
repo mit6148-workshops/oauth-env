@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 // set up mongoDB connection
-// Example URI ---> mongodb://aaron:badpassword123@ds237707.mlab.com:37707/catbookdb';
+// Example URI ---> mongodb+srv://weblab:6jYctMizX5Y5ie6W@catbook-fsjig.mongodb.net/catbookdb?retryWrites=true
 const mongoURL = 'ENTER YOUR OWN MONGODB URI HERE!';
 const options = {
-  useMongoClient: true
+  useNewUrlParser: true
 };
 mongoose.connect(mongoURL, options);
 mongoose.Promise = global.Promise;
