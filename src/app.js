@@ -1,3 +1,6 @@
+// dotenv
+const dotenv = require('dotenv').config();
+
 // libraries
 const http = require('http');
 const bodyParser = require('body-parser');
@@ -10,7 +13,6 @@ const passport = require('./passport');
 const views = require('./routes/views');
 const api = require('./routes/api');
 
-
 // initialize express app
 const app = express();
 
@@ -20,7 +22,7 @@ app.use(bodyParser.json());
 
 // set up sessions
 app.use(session({
-  secret: 'session-secret',
+  secret: process.env.SESSION_SECRET,
   resave: 'false',
   saveUninitialized: 'true'
 }));
